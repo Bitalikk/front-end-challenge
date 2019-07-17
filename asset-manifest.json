@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/front-end-challenge/static/css/main.113d25c7.chunk.css",
+    "main.js": "/front-end-challenge/static/js/main.b91e9fa0.chunk.js",
+    "main.js.map": "/front-end-challenge/static/js/main.b91e9fa0.chunk.js.map",
+    "runtime~main.js": "/front-end-challenge/static/js/runtime~main.88d65856.js",
+    "runtime~main.js.map": "/front-end-challenge/static/js/runtime~main.88d65856.js.map",
+    "static/js/2.c09f8263.chunk.js": "/front-end-challenge/static/js/2.c09f8263.chunk.js",
+    "static/js/2.c09f8263.chunk.js.map": "/front-end-challenge/static/js/2.c09f8263.chunk.js.map",
+    "index.html": "/front-end-challenge/index.html",
+    "precache-manifest.18c49e9e4b027abebb9cb4dd44ef4714.js": "/front-end-challenge/precache-manifest.18c49e9e4b027abebb9cb4dd44ef4714.js",
+    "service-worker.js": "/front-end-challenge/service-worker.js",
+    "static/css/main.113d25c7.chunk.css.map": "/front-end-challenge/static/css/main.113d25c7.chunk.css.map"
+  }
+}
