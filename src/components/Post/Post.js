@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Modal from '../Modal/Modal';
+import PostEditor from '../PostEditor/PostEditor';
 import css from './Post.module.css';
 
 const getIdFromProps = props => props.match.params.id;
@@ -12,15 +14,22 @@ class Post extends Component {
     location: PropTypes.shape().isRequired,
     items: PropTypes.shape().isRequired,
     comments: PropTypes.arrayOf(PropTypes.shape().isRequired).isRequired,
+    editPost: PropTypes.func.isRequired,
   };
 
   state = {
     text: '',
+    isEditing: false,
+    selectedPostId: null,
   };
 
   componentDidMount() {
     const { fetchPostWithComment } = this.props;
     const id = getIdFromProps(this.props);
+
+    this.setState({
+      selectedPostId: id,
+    });
 
     fetchPostWithComment(id);
   }
@@ -52,6 +61,29 @@ class Post extends Component {
     this.reset();
   };
 
+  // Update post
+
+  openEditPostModal = () => {
+    this.setState({
+      isEditing: true,
+    });
+  };
+
+  closeEditPostModal = () => {
+    this.setState({
+      isEditing: false,
+    });
+  };
+
+  updatePost = ({ title, body }) => {
+    const { editPost } = this.props;
+    const { selectedPostId } = this.state;
+
+    editPost(selectedPostId, { title, body });
+
+    this.closeEditPostModal();
+  };
+
   reset = () => {
     this.setState({
       text: '',
@@ -60,11 +92,19 @@ class Post extends Component {
 
   render() {
     const { items, comments } = this.props;
-    const { text } = this.state;
+    const { text, isEditing } = this.state;
+
     return (
       <article className={css.wrapper}>
-        <button type="button" onClick={this.handleGoBack}>
+        <button
+          type="button"
+          className={css.btnBack}
+          onClick={this.handleGoBack}
+        >
           Go back
+        </button>
+        <button type="button" onClick={this.openEditPostModal}>
+          Edit
         </button>
         <div className={css.postContainer}>
           <h2>{items.title}</h2>
@@ -97,6 +137,17 @@ class Post extends Component {
             </button>
           </form>
         </div>
+
+        {isEditing && (
+          <Modal onClose={this.closeEditPostModal}>
+            <PostEditor
+              onSave={this.updatePost}
+              onCancel={this.closeEditPostModal}
+              title={items.title}
+              body={items.body}
+            />
+          </Modal>
+        )}
       </article>
     );
   }

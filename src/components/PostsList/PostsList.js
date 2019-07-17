@@ -14,8 +14,6 @@ class PostsList extends Component {
 
   state = {
     isCreating: false,
-    // isEditing: false,
-    // selectedPostId: null,
   };
 
   // Create post
@@ -39,37 +37,6 @@ class PostsList extends Component {
     this.closeCreatePostModal();
   };
 
-  // Update post
-
-  // openEditPostModal = id => {
-  //   this.setState({
-  //     isEditing: true,
-  //     selectedPostId: id,
-  //   });
-  // };
-
-  // closeEditPostModal = () => {
-  //   this.setState({
-  //     isEditing: false,
-  //     selectedPostId: null,
-  //   });
-  // };
-
-  // updatePost = ({ text, priority }) => {
-  //   TaskAPI.updateTask(this.state.selectedTaskId, { text, priority }).then(
-  //     updatedTask => {
-  //       this.setState(
-  //         state => ({
-  //           tasks: state.tasks.map(task =>
-  //             task.id === state.selectedTaskId ? updatedTask : task,
-  //           ),
-  //         }),
-  //         this.closeEditTaskModal,
-  //       );
-  //     },
-  //   );
-  // };
-
   render() {
     const { items = [], location } = this.props;
     const { isCreating } = this.state;
@@ -77,19 +44,22 @@ class PostsList extends Component {
       <>
         <h2>Posts</h2>
         <ul className={css.list}>
-          {items.map(item => (
-            <li key={item.id} className={css.item}>
-              <Link
-                to={{
-                  pathname: `/posts/${item.id}`,
-                  state: { from: location },
-                }}
-                className={css.link}
-              >
-                {item.title}
-              </Link>
-            </li>
-          ))}
+          {items.map(
+            item =>
+              item.title && (
+                <li key={item.id} className={css.item}>
+                  <Link
+                    to={{
+                      pathname: `/posts/${item.id}`,
+                      state: { from: location },
+                    }}
+                    className={css.link}
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ),
+          )}
         </ul>
         <button type="button" onClick={this.openCreatePostModal}>
           Create Post

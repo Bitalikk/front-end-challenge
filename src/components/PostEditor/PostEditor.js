@@ -38,13 +38,13 @@ export default class TaskEditor extends Component {
 
   reset() {
     this.setState({
-      text: '',
+      title: '',
       body: '',
     });
   }
 
   render() {
-    const { text, body } = this.state;
+    const { title, body } = this.state;
     const { onCancel } = this.props;
 
     return (
@@ -53,7 +53,7 @@ export default class TaskEditor extends Component {
           className={css.inputContent}
           type="text"
           name="title"
-          value={text}
+          value={title}
           onChange={this.handleChange}
           placeholder="Title"
         />

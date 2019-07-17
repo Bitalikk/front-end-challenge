@@ -13,6 +13,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   fetchPostWithComment: postsOperations.fetchPostWithComment,
   addComment: commentsOperations.addComment,
+  editPost: postsOperations.editPost,
 };
 
 export default connect(
